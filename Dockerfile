@@ -4,7 +4,7 @@ WORKDIR /service
 COPY package.json /service/
 RUN yarn
 
-EXPOSE 4000
+EXPOSE 5000
 
 COPY . /service
 CMD node "src/index.js"
