@@ -9,7 +9,8 @@ router.put('/:secretName', (req, res) => {
 });
 
 router.get('/:secretName', (req, res) => {
-  res.status(200).send(secrets[req.params.secretName]);
+  const value = secrets[req.params.secretName];
+  value ? res.status(200).send(value) : res.sendStatus(404);
 });
 
 module.exports = router;
