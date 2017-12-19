@@ -1,16 +1,24 @@
 const {Router} = require('express');
+const uuid = require('uuid/v4');
 
 const router = Router();
-const secrets = {};
+const vault = {};
+
+const generateSecret = (value) => ({
+  attributes: {},
+  id: uuid(),
+  managed: false,
+  value,
+});
 
 router.put('/:secretName', (req, res) => {
-  secrets[req.params.secretName] = req.body.value;
+  vault[req.params.secretName] = generateSecret(req.body.value);
   res.sendStatus(200);
 });
 
 router.get('/:secretName', (req, res) => {
-  const value = secrets[req.params.secretName];
-  value ? res.status(200).send(value) : res.sendStatus(404);
+  const secret = vault[req.params.secretName];
+  secret ? res.status(200).send(secret) : res.sendStatus(404);
 });
 
 module.exports = router;
