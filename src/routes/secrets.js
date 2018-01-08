@@ -18,7 +18,7 @@ router.put('/:secretName', (req, res) => {
 
 router.get('/:secretName', (req, res) => {
   const secret = vault[req.params.secretName];
-  secret ? res.status(200).send(secret) : res.sendStatus(404);
+  secret ? res.status(200).json(secret) : res.sendStatus(404);
 });
 
 module.exports = router;
